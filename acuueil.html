@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForeIUT – Home</title>
+
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 340px;
+            background: #f8ffff;
+            border-radius: 30px;
+            border: 3px solid #cfeaf5;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        h1 {
+            color: #2ecc71;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        /* Bulle */
+        .bubble {
+            background: white;
+            border: 2px solid #000;
+            border-radius: 20px;
+            padding: 12px 14px;
+            font-size: 15px;
+            width: 260px;
+            text-align: center;
+            margin: 0 auto 20px;
+        }
+
+        /* Section principale : image à gauche + menu à droite */
+        .main-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .chicken {
+            width: 140px;
+            margin-left: 0;
+        }
+		
+		/* Animation comme la page 1 */
+		@keyframes float {
+		0% { transform: translateY(0px); }
+		50% { transform: translateY(-8px); }
+		100% { transform: translateY(0px); }
+		}
+
+		/* Pour animer l'image */
+		.float {
+		animation: float 3s ease-in-out infinite;
+		}
+
+
+        .menu-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        /* Boutons menu */
+        .menu-btn {
+            width: 150px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 20px;
+            border: 2px solid #333;
+            background: #b3e5ff;
+            cursor: pointer;
+            transition: 0.25s;
+            text-align: center;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.05);
+            background: #e6fff0;
+        }
+
+        /* Barre de navigation */
+        .navbar {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 340px;
+            display: flex;
+            justify-content: space-around;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 3px solid #cfeaf5;
+            padding: 12px 0;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .nav-item span {
+            font-size: 22px;
+            display: block;
+        }
+
+        .nav-item.active {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>ForeIUT</h1>
+
+        <div class="bubble">
+            Here you find all the information about IUT, Saint-Étienne, 
+            what to prepare and more information!
+        </div>
+
+        <!-- Section image + menu -->
+        <div class="main-area">
+
+            <!-- Mascotte poulet -->
+			<img src="poule.png" class="chicken float" />
+
+
+            <!-- Options menu à droite -->
+            <div class="menu-options">
+                <button class="menu-btn" onclick="location.href='iut.html'">IUT</button>
+                <button class="menu-btn" onclick="location.href='saint-etienne.html'">Saint-Étienne</button>
+                <button class="menu-btn" onclick="location.href='prepare.html'">What to prepare</button>
+                <button class="menu-btn" onclick="location.href='more-info.html'">More Information</button>
+            </div>
+
+        </div>
+
+        <!-- Navigation bas -->
+        <div class="navbar">
+            <div class="nav-item active" onclick="location.href='news.html'">
+                <span>📰</span> News
+            </div>
+            <div class="nav-item" onclick="location.href='menu.html'">
+                <span>📚</span> Menu
+            </div>
+            <div class="nav-item" onclick="location.href='map.html'">
+                <span>🗺️</span> IUT Maps
+            </div>
+            <div class="nav-item" onclick="location.href='chat.html'">
+                <span>💬</span> Chat
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

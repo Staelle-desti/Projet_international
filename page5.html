@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForeIUT – Page 5</title>
+
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 340px;
+            background: #f8ffff;
+            border-radius: 30px;
+            border: 3px solid #cfeaf5;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2ecc71;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .scene {
+            position: relative;
+            width: 300px;
+            height: 260px;
+            margin: 0 auto;
+        }
+
+        /* Abeille */
+        .bee {
+            position: absolute;
+            left: 0px;
+            top: 40px;
+            width: 100px;
+        }
+		
+		/* Animation comme la page 1 */
+			@keyframes float {
+				0% { transform: translateY(0px); }
+				50% { transform: translateY(-8px); }
+				100% { transform: translateY(0px); }
+			}
+
+			/* Pour animer l'image */
+			.float {
+				animation: float 3s ease-in-out infinite;
+			}
+
+
+        /* Bulles */
+        .bubble {
+            position: absolute;
+            background: white;
+            border: 2px solid #000;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            max-width: 180px;
+        }
+
+        /* Bulle pour demander l'email */
+        .bubble.ask {
+            top: 20px;
+            right: 0;
+        }
+
+        /* Bulle réponse après saisie */
+        .bubble.answer {
+            top: 150px;
+            right: 0;
+            display: none;
+        }
+
+        input {
+            margin-top: 10px;
+            padding: 8px;
+            width: 170px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 200px;
+            padding: 14px;
+            font-size: 22px;
+            border-radius: 40px;
+            border: 2px solid #333;
+            background: #ffffff;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #e6fff0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>ForeIUT</h1>
+
+    <div class="scene">
+        <!-- Abeille -->
+        <img src="abeille.jpg" class="bee float" />
+
+
+        <!-- Bulle de question -->
+        <div class="bubble ask">
+            You can write your email address if you want.<br>
+            <input type="email" id="emailInput" placeholder="your@email.com">
+        </div>
+
+        <!-- Bulle de réponse -->
+        <div class="bubble answer" id="answerBubble">
+            Now it's all finished, let's go to the main page!
+        </div>
+    </div>
+
+    <button id="goBtn">GO!</button>
+</div>
+
+<script>
+    document.getElementById("emailInput").addEventListener("input", function() {
+        const email = this.value;
+
+        if (email.length > 5 && email.includes("@")) {
+            document.getElementById("answerBubble").style.display = "block";
+        }
+    });
+
+    document.getElementById("goBtn").addEventListener("click", () => {
+        // Redirection vers la page d'accueil
+        window.location.href = "index.html";
+    });
+</script>
+
+</body>
+</html>

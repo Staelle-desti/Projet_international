@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForeIUT – Page 4</title>
+
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 340px;
+            background: #f8ffff;
+            border-radius: 30px;
+            border: 3px solid #cfeaf5;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2ecc71;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .scene {
+            position: relative;
+            width: 300px;
+            height: 260px;
+            margin: 0 auto;
+        }
+
+        /* Image du mouton */
+        .sheep {
+            position: absolute;
+            left: -30px;
+            bottom: 20px;
+            width: 180px;
+        }
+
+        /* Bulles */
+        .bubble {
+            position: absolute;
+            background: white;
+            border: 2px solid #000;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            max-width: 180px;
+        }
+
+        /* Bulle de question du mouton */
+        .bubble.ask {
+            top: 30px;
+            right: -20px;
+        }
+
+        /* Bulle de réponse après saisie */
+        .bubble.answer {
+            top: 140px;
+            right: 0;
+            display: none;
+        }
+
+        input {
+            margin-top: 10px;
+            padding: 8px;
+            width: 160px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 200px;
+            padding: 14px;
+            font-size: 20px;
+            border-radius: 40px;
+            border: 2px solid #333;
+            background: #ffffff;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #e6fff0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>ForeIUT</h1>
+
+    <div class="scene">
+        <!-- Mouton -->
+        <img src="mouton.jpeg" class="sheep">
+
+        <!-- Bulle question -->
+        <div class="bubble ask">
+            How old are you?<br>
+            <input type="number" id="ageInput" placeholder="Enter your age">
+        </div>
+
+        <!-- Bulle réponse -->
+        <div class="bubble answer" id="answerBubble">
+            Wow we are a bit younger but age doesn't matter at all to have fun together!
+        </div>
+    </div>
+
+    <button id="nextBtn">Next</button>
+</div>
+
+<script>
+    document.getElementById("nextBtn").addEventListener("click", () => {
+        const age = document.getElementById("ageInput").value;
+
+        if (!age) {
+            alert("Please enter your age!");
+            return;
+        }
+
+        // Affiche la bulle de réponse
+        document.getElementById("answerBubble").style.display = "block";
+
+        // Plus tard -> page 5
+        // window.location.href = "page5.html";
+    });
+</script>
+
+</body>
+</html>
