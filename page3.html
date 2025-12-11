@@ -108,7 +108,7 @@
             font-size: 20px;
             border-radius: 40px;
             border: 2px solid #333;
-            background: #ffffff;
+            background: blue;
             cursor: pointer;
             transition: 0.25s;
         }
@@ -149,25 +149,50 @@
     </div>
 
     <script>
-        document.getElementById("nameInput").addEventListener("input", function() {
-            const name = this.value;
-            if (name) {
-                document.getElementById("displayName").textContent = name;
-            }
-        });
+    const nameInput = document.getElementById("nameInput");
+    const displayName = document.getElementById("displayName");
+    const sheepBubble = document.getElementById("sheepBubble");
+    const nextBtn = document.getElementById("nextBtn");
 
-        document.getElementById("nextBtn").addEventListener("click", () => {
-            const name = document.getElementById("nameInput").value;
+    // Au départ, on cache la bulle et désactive le bouton
+    sheepBubble.style.display = "none";
+    sheepBubble.style.opacity = 0;
+    sheepBubble.style.transition = "opacity 0.5s ease-in-out";
+    nextBtn.disabled = true; // bouton désactivé
+    nextBtn.style.opacity = 0.5; // visuel désactivé
+
+    // Affiche la bulle quand l'utilisateur appuie sur Enter
+    nameInput.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            const name = this.value.trim();
             if (name) {
-                document.getElementById("sheepBubble").style.display = "block";
-                alert(`Welcome, ${name}!`);
-                // Redirection plus tard
-                // window.location.href = "page4.html";
+                displayName.textContent = name;
+                sheepBubble.style.display = "block";
+                // animation fade-in
+                setTimeout(() => {
+                    sheepBubble.style.opacity = 1;
+                }, 10);
+                // active le bouton Next
+                nextBtn.disabled = false;
+                nextBtn.style.opacity = 1;
             } else {
                 alert("Please enter your name.");
             }
-        });
-    </script>
+        }
+    });
+
+    // Next sert à aller sur la page 4
+    nextBtn.addEventListener("click", () => {
+        const name = nameInput.value.trim();
+        if (name) {
+            window.location.href = "page4.html";
+        } else {
+            alert("Please enter your name.");
+        }
+    });
+</script>
+
+
 
 </body>
 </html>

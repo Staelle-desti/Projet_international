@@ -42,9 +42,9 @@
         /* Abeille */
         .bee {
             position: absolute;
-            left: 0px;
+            left: 180px;
             top: 40px;
-            width: 100px;
+            width: 150px;
         }
 		
 		/* Animation comme la page 1 */
@@ -74,13 +74,13 @@
         /* Bulle pour demander l'email */
         .bubble.ask {
             top: 20px;
-            right: 0;
+            right: 120px;
         }
 
         /* Bulle réponse après saisie */
         .bubble.answer {
-            top: 150px;
-            right: 0;
+            top: 190px;
+            right: 50px;
             display: none;
         }
 
@@ -101,7 +101,7 @@
             font-size: 22px;
             border-radius: 40px;
             border: 2px solid #333;
-            background: #ffffff;
+            background: blue;
             cursor: pointer;
             transition: 0.25s;
         }
@@ -139,19 +139,49 @@
 </div>
 
 <script>
-    document.getElementById("emailInput").addEventListener("input", function() {
-        const email = this.value;
+    const emailInput = document.getElementById("emailInput");
+    const answerBubble = document.getElementById("answerBubble");
+    const goBtn = document.getElementById("goBtn");
 
-        if (email.length > 5 && email.includes("@")) {
-            document.getElementById("answerBubble").style.display = "block";
+    // Au départ : bulle cachée et bouton désactivé
+    answerBubble.style.display = "none";
+    answerBubble.style.opacity = 0;
+    answerBubble.style.transition = "opacity 0.5s ease-in-out";
+    goBtn.disabled = true;
+    goBtn.style.opacity = 0.5;
+
+    // Affiche la bulle quand l'utilisateur appuie sur Enter et email valide
+    emailInput.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            const email = this.value.trim();
+            // Vérification simple de format d'email
+            if (email.length > 5 && email.includes("@")) {
+                // Affiche la bulle avec fade-in
+                answerBubble.style.display = "block";
+                setTimeout(() => {
+                    answerBubble.style.opacity = 1;
+                }, 10);
+
+                // Active le bouton GO!
+                goBtn.disabled = false;
+                goBtn.style.opacity = 1;
+            } else {
+                alert("Please enter a valid email address.");
+            }
         }
     });
 
-    document.getElementById("goBtn").addEventListener("click", () => {
-        // Redirection vers la page d'accueil
-        window.location.href = "index.html";
+    // GO! sert à aller sur la page d'accueil
+    goBtn.addEventListener("click", () => {
+        const email = emailInput.value.trim();
+        if (email.length > 5 && email.includes("@")) {
+            window.location.href = "accueil.html";
+        } else {
+            alert("Please enter a valid email address.");
+        }
     });
 </script>
+
 
 </body>
 </html>

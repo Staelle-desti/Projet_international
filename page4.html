@@ -46,6 +46,18 @@
             bottom: 20px;
             width: 180px;
         }
+		
+		/* Animation comme la page 1 */
+		@keyframes float {
+		0% { transform: translateY(0px); }
+		50% { transform: translateY(-8px); }
+		100% { transform: translateY(0px); }
+		}
+
+	/* Pour animer l'image */
+		.float {
+		animation: float 3s ease-in-out infinite;
+		}
 
         /* Bulles */
         .bubble {
@@ -88,7 +100,7 @@
             font-size: 20px;
             border-radius: 40px;
             border: 2px solid #333;
-            background: #ffffff;
+            background: blue;
             cursor: pointer;
             transition: 0.25s;
         }
@@ -107,7 +119,7 @@
 
     <div class="scene">
         <!-- Mouton -->
-        <img src="mouton.jpeg" class="sheep">
+        <img src="mouton.jpeg" class="sheep float" />
 
         <!-- Bulle question -->
         <div class="bubble ask">
@@ -125,21 +137,48 @@
 </div>
 
 <script>
-    document.getElementById("nextBtn").addEventListener("click", () => {
-        const age = document.getElementById("ageInput").value;
+    const ageInput = document.getElementById("ageInput");
+    const answerBubble = document.getElementById("answerBubble");
+    const nextBtn = document.getElementById("nextBtn");
 
-        if (!age) {
-            alert("Please enter your age!");
-            return;
+    // Au départ : bulle cachée et bouton désactivé
+    answerBubble.style.display = "none";
+    answerBubble.style.opacity = 0;
+    answerBubble.style.transition = "opacity 0.5s ease-in-out";
+    nextBtn.disabled = true;
+    nextBtn.style.opacity = 0.5;
+
+    // Affiche la bulle quand l'utilisateur appuie sur Enter
+    ageInput.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            const age = parseInt(this.value.trim(), 10);
+            if (!isNaN(age) && age >= 0) {
+                // Affiche la bulle de réponse avec fade-in
+                answerBubble.style.display = "block";
+                setTimeout(() => {
+                    answerBubble.style.opacity = 1;
+                }, 10);
+
+                // Active le bouton Next
+                nextBtn.disabled = false;
+                nextBtn.style.opacity = 1;
+            } else {
+                alert("Please enter a valid age (0 or higher).");
+            }
         }
+    });
 
-        // Affiche la bulle de réponse
-        document.getElementById("answerBubble").style.display = "block";
-
-        // Plus tard -> page 5
-        // window.location.href = "page5.html";
+    // Next sert à aller sur la page 5
+    nextBtn.addEventListener("click", () => {
+        const age = parseInt(ageInput.value.trim(), 10);
+        if (!isNaN(age) && age >= 0) {
+            window.location.href = "page5.html";
+        } else {
+            alert("Please enter a valid age (0 or higher).");
+        }
     });
 </script>
+
 
 </body>
 </html>
