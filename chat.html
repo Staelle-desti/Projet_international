@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat International</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-4 shadow-md flex justify-between items-center">
+    <h1 class="text-xl font-bold">Chat International</h1>
+    <div class="flex space-x-4">
+      <button class="hover:bg-blue-500 px-3 py-1 rounded">Profil</button>
+      <button class="hover:bg-blue-500 px-3 py-1 rounded">Notifications</button>
+      <button class="hover:bg-blue-500 px-3 py-1 rounded">Paramètres</button>
+    </div>
+  </header>
+
+  <!-- Main Chat Section -->
+  <main class="p-6 max-w-3xl mx-auto">
+    <section class="bg-white shadow-md rounded-lg p-4">
+      <h2 class="text-lg font-semibold mb-4">Salle de chat principale</h2>
+      <div id="chat-box" class="h-96 overflow-y-auto border border-gray-300 rounded p-3 mb-4 bg-gray-50">
+        <!-- Messages dynamiques -->
+        <div class="mb-2">
+          <span class="font-bold">Alice:</span> Bonjour tout le monde !
+        </div>
+        <div class="mb-2">
+          <span class="font-bold">Bob:</span> Salut Alice, comment ça va ?
+        </div>
+      </div>
+      <form id="chat-form" class="flex space-x-2">
+        <input type="text" id="message-input" placeholder="Écrire un message..." class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Envoyer</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Script pour simuler l'envoi de message -->
+  <script>
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('message-input');
+    const chatBox = document.getElementById('chat-box');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if(message){
+        const newMessage = document.createElement('div');
+        newMessage.className = 'mb-2';
+        newMessage.innerHTML = `<span class="font-bold">Vous:</span> ${message}`;
+        chatBox.appendChild(newMessage);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        input.value = '';
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUT Map</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 340px;
+            background: #f8ffff;
+            border-radius: 30px;
+            border: 3px solid #cfeaf5;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+        }
+
+        .bee {
+            width: 150px;
+            margin: 10px auto;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        .bubble {
+            background: #ffffff;
+            border: 2px solid #000;
+            padding: 10px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            max-width: 260px;
+        }
+
+        #map {
+            width: 100%;
+            height: 55vh;
+            border-radius: 20px;
+            border: 2px solid #cfeaf5;
+            background: #e8f3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* Barre de navigation */
+        .navbar {
+            
+            transform: translateX(-3%);
+            width: 340px;
+            display: flex;
+            justify-content: space-around;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 3px solid #cfeaf5;
+            padding: 10px 0;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .nav-item span {
+            font-size: 22px;
+            display: block;
+        }
+
+        .nav-item.active {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Mascotte -->
+    <img src="logo.png" class="bee">
+
+    <!-- Bulle d’intro -->
+    <div class="bubble">
+        Here you can explore the IUT Campus!  
+        Click markers to learn more.
+    </div>
+
+    <!-- Carte Google -->
+    <div id="map">Map loading…</div>
+
+    <!-- Navigation bas -->
+        <div class="navbar">
+            <div class="nav-item active" onclick="location.href='news.html'">
+                <span>📰</span> News
+            </div>
+            <div class="nav-item" onclick="location.href='accueil.html'">
+                <span>📚</span> Menu
+            </div>
+            <div class="nav-item" onclick="location.href='map.html'">
+                <span>🗺️</span> IUT Maps
+            </div>
+            <div class="nav-item" onclick="location.href='chat.html'">
+                <span>💬</span> Chat
+            </div>
+        </div>
+
+</div>
+
+<!-- Google Maps Script -->
+
+ 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtK2CkQk0wf1GD84Cbs_M4XLhDxSmBFqA&callback=initMap" async defer></script>
+
+<script>
+function initMap() {
+    const iut = { lat: 45.4397, lng: 4.3872 }; 
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+        center: iut,
+        zoom: 17,
+        mapId: "4504f8b37365c3d0" // style Google Map simple et moderne
+    });
+
+    const locations = [
+        { name: "IUT Jean Monnet – Main Entrance", position: { lat: 45.4397, lng: 4.3872 } },
+        { name: "Building A", position: { lat: 45.4399, lng: 4.3867 } },
+        { name: "Building B", position: { lat: 45.4394, lng: 4.3869 } },
+        { name: "Building C", position: { lat: 45.4391, lng: 4.3875 } },
+        { name: "Administration – Office", position: { lat: 45.4396, lng: 4.3879 } },
+        { name: "CROUS Cafeteria", position: { lat: 45.4389, lng: 4.3871 } },
+        { name: "Student Parking", position: { lat: 45.4387, lng: 4.3866 } },
+        { name: "Bus Stop – Métare", position: { lat: 45.4393, lng: 4.3883 } }
+    ];
+
+    locations.forEach(loc => {
+        const marker = new google.maps.Marker({
+            position: loc.position,
+            map: map,
+            title: loc.name
+        });
+
+        const info = new google.maps.InfoWindow({
+            content: `<strong>${loc.name}</strong>`
+        });
+
+        marker.addListener("click", () => {
+            info.open(map, marker);
+        });
+    });
+}
+</script>
+
+</body>
+</html>
