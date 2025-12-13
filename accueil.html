@@ -71,6 +71,37 @@
 		.float {
 		animation: float 3s ease-in-out infinite;
 		}
+		
+				/* HEADER */
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.points {
+			background: #fff;
+			border: 2px solid #2ecc71;
+			border-radius: 20px;
+			padding: 6px 12px;
+			font-size: 14px;
+			cursor: pointer;
+		}
+
+		.qr {
+			background: #2ecc71;
+			color: white;
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 20px;
+			cursor: pointer;
+		}
+
 
 
         .menu-options {
@@ -130,8 +161,18 @@
 </head>
 
 <body>
+	
 
     <div class="container">
+	
+	<!-- HEADER -->
+    <div class="header">
+        <div class="points" onclick="showPointsInfo()">
+            ⭐ Points: <span id="points">0</span>
+        </div>
+
+        <div class="qr" onclick="scanQR()">📷</div>
+    </div>
 
         <h1>ForeIUT</h1>
 
@@ -156,6 +197,13 @@
             </div>
 
         </div>
+		
+				<div id="qrScanner"
+			 style="display:none; margin-top:10px; text-align:center;">
+			<div id="reader" style="width:250px; margin:auto;"></div>
+			<button onclick="closeScanner()">Close</button>
+		</div>
+
 
         <!-- Navigation bas -->
         <div class="navbar">
@@ -168,12 +216,78 @@
             <div class="nav-item" onclick="location.href='map.html'">
                 <span>🗺️</span> IUT Maps
             </div>
-            <div class="nav-item" onclick="location.href='chat.html'">
+            <div class="nav-item" onclick="location.href='login.html'">
                 <span>💬</span> Chat
             </div>
         </div>
 
     </div>
+	
+	<script>
+/* TEMP POINT SYSTEM */
+let pts = localStorage.getItem("points") || 0;
+document.getElementById("points").innerText = pts;
+
+function showPointsInfo() {
+    alert(
+        "Points can be earned by:\n\n" +
+        "• Scanning ECO CAMPUS QR codes\n" +
+        "• Getting likes in chat\n" +
+        "• Participating in events\n\n" +
+        "Points can be used for food at CROUS or snacks."
+    );
+}
+
+function scanQR() {
+    alert("QR Scanner coming soon 📷");
+}
+
+function go(page) {
+    window.location.href = page;
+}
+</script>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+let html5QrCode;
+
+function openScanner() {
+    document.getElementById("qrScanner").style.display = "block";
+
+    html5QrCode = new Html5Qrcode("reader");
+
+    html5QrCode.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: 200 },
+        qrCodeMessage => {
+            handleQRCode(qrCodeMessage);
+        }
+    );
+}
+
+function closeScanner() {
+    if (html5QrCode) {
+        html5QrCode.stop();
+    }
+    document.getElementById("qrScanner").style.display = "none";
+}
+
+function handleQRCode(data) {
+    closeScanner();
+
+    alert("QR detected:\n" + data);
+
+    // 🎯 SYSTEME DE POINTS
+    let pts = parseInt(localStorage.getItem("points") || 0);
+    pts += 1;
+    localStorage.setItem("points", pts);
+    document.getElementById("points").innerText = pts;
+
+    alert("🎉 You earned +1 point!");
+}
+</script>
+
 
 </body>
 </html>

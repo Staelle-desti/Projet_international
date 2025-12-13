@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ForeIUT – Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: "Comic Sans MS", cursive;
+    background: #e6f7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    width: 340px;
+    background: #f8ffff;
+    border-radius: 30px;
+    border: 3px solid #cfeaf5;
+    padding: 20px;
+    text-align: center;
+}
+h1 {
+    color: #2ecc71;
+}
+.info {
+    margin-top: 20px;
+    background: #eaf7ff;
+    padding: 15px;
+    border-radius: 15px;
+}
+button {
+    margin-top: 20px;
+    padding: 12px;
+    width: 200px;
+    border-radius: 40px;
+    border: none;
+    background: #2ecc71;
+    color: white;
+    font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Your Profile</h1>
+
+    <div class="info">
+        <p><strong>Name:</strong> <span id="username"></span></p>
+    </div>
+
+    <button onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+document.getElementById("username").textContent =
+    localStorage.getItem("chatName") || "Anonymous";
+
+function goBack() {
+    window.location.href = "chat.html";
+}
+</script>
+</body>
+</html>
