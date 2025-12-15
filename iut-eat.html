@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUT – Place to Eat</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#e6f7ff;
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:340px;
+    height:90vh;
+    background:#f8ffff;
+    border-radius:30px;
+    border:3px solid #cfeaf5;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+}
+
+h1{
+    text-align:center;
+    color:#2ecc71;
+    margin-bottom:20px;
+}
+
+.menu-btn{
+    padding:18px;
+    margin-bottom:15px;
+    border-radius:20px;
+    border:3px solid #6dc5ff;
+    background:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.menu-btn:hover{
+    transform:scale(1.05);
+    background:#eaf7ff;
+}
+
+.nav{
+    margin-top:auto;
+    display:flex;
+    justify-content:space-around;
+    border-top:2px solid #cfeaf5;
+    padding-top:10px;
+}
+
+.nav button{
+    background:none;
+    border:none;
+    font-size:22px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>🍽️ Place to Eat</h1>
+
+<button class="menu-btn" onclick="location.href='iut-eat-crous.html'">
+🍛 CROUS Restaurant
+</button>
+
+<button class="menu-btn" onclick="location.href='iut-eat-cafeteria.html'">
+☕ IUT Cafeteria
+</button>
+
+<div class="nav">
+    <button onclick="history.back()">⬅️</button>
+</div>
+
+</div>
+</body>
+</html>

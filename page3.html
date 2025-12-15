@@ -6,7 +6,7 @@
     <title>ForeIUT – Page 3</title>
     <style>
         body {
-            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-family: Arial, sans-serif;
             background: #ffffff;
             margin: 0;
             display: flex;
@@ -163,23 +163,32 @@
 
     // Affiche la bulle quand l'utilisateur appuie sur Enter
     nameInput.addEventListener("keydown", function(event) {
-        if (event.key === "Enter") {
-            const name = this.value.trim();
-            if (name) {
-                displayName.textContent = name;
-                sheepBubble.style.display = "block";
-                // animation fade-in
-                setTimeout(() => {
-                    sheepBubble.style.opacity = 1;
-                }, 10);
-                // active le bouton Next
-                nextBtn.disabled = false;
-                nextBtn.style.opacity = 1;
-            } else {
-                alert("Please enter your name.");
-            }
-        }
-    });
+    if (event.key === "Enter") {
+        event.preventDefault(); // Empêche le comportement par défaut (soumission de formulaire)
+        validateName();
+    }
+		});
+
+		// Écouteur pour le changement de valeur (utile pour le clavier virtuel)
+		nameInput.addEventListener("change", function() {
+			validateName();
+		});
+
+		function validateName() {
+			const name = nameInput.value.trim();
+			if (name) {
+				displayName.textContent = name;
+				sheepBubble.style.display = "block";
+				setTimeout(() => {
+					sheepBubble.style.opacity = 1;
+				}, 10);
+				nextBtn.disabled = false;
+				nextBtn.style.opacity = 1;
+			} else {
+				alert("Please enter your name.");
+			}
+		}
+
 
     // Next sert à aller sur la page 4
     nextBtn.addEventListener("click", () => {

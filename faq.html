@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForeIUT – FAQ</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #e6f7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 340px;
+    height: 90vh;
+    background: #f8ffff;
+    border-radius: 30px;
+    border: 3px solid #cfeaf5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+h1 {
+    color: #2ecc71;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.faq-item {
+    background: white;
+    border: 2px solid #6dc5ff;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.faq-question {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.nav {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-around;
+    border-top: 2px solid #cfeaf5;
+    padding-top: 10px;
+}
+
+.nav button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>❓ FAQ</h1>
+
+    <div class="faq-item">
+        <div class="faq-question">How do I apply for Visale?</div>
+        <div class="faq-answer">You can apply for Visale online on the <a href="https://www.visale.fr" target="_blank">Visale website</a>. Make sure you have all the required documents.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">What is CAF and how do I apply?</div>
+        <div class="faq-answer">CAF (Caisse d'Allocations Familiales) provides financial assistance for housing. You can apply on the <a href="https://www.caf.fr" target="_blank">CAF website</a>.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Where can I find student residences?</div>
+        <div class="faq-answer">You can find student residences through CROUS or rental platforms like SeLoger.</div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav">
+    <button onclick="history.back()">⬅️Return</button>
+	</div>
+</div>
+</body>
+</html>

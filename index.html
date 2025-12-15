@@ -1,167 +1,190 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ForeIUT – Welcome</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForeIUT � Welcome</title>
 
-<style>
-    body {
-        font-family: "Arial", sans-serif;
-        background: #ffffff;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background: #ffffff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .container {
-        width: 340px;
-        background: #f8ffff;
-        border-radius: 30px;
-        border: 3px solid #cfeaf5;
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+        .container {
+            width: 340px;
+            background: #f8ffff;
+            border-radius: 30px;
+            border: 3px solid #cfeaf5;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-    h1 {
-        color: #2ecc71;
-        font-size: 32px;
-        margin-bottom: 10px;
-    }
+        h1 {
+            color: #2ecc71;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
 
-    /* SECTION ANIMAUX */
-    .animals-wrapper {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
+        /* SECTION ANIMAUX */
+        .animals-wrapper {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
 
-    .top {
-        display: flex;
-        justify-content: center;
-    }
+        .top {
+            display: flex;
+            justify-content: center;
+        }
 
-    .bottom {
-        display: flex;
-        justify-content: space-between;
-        width: 220px;
-    }
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            width: 220px;
+        }
 
-    .animal {
-        width: 90px;
-        animation: float 3s ease-in-out infinite;
-    }
+        .animal {
+            width: 90px;
+            animation: float 3s ease-in-out infinite;
+        }
 
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-8px); }
-        100% { transform: translateY(0px); }
-    }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
 
-    /* BOUTON */
-    button {
-        margin-top: 20px;
-        width: 200px;
-        padding: 14px;
-        font-size: 20px;
-        border-radius: 40px;
-        border: 2px solid #333;
-        background: blue;
-        color: white;
-        cursor: pointer;
-        transition: 0.25s;
-    }
+        /* BOUTONS */
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
 
-    button:hover {
-        transform: scale(1.05);
-        background: #e6fff0;
-        color: black;
-    }
+        button {
+            width: 200px;
+            padding: 14px;
+            font-size: 20px;
+            border-radius: 40px;
+            border: 2px solid #333;
+            background: #2ecc71;
+            color: white;
+            cursor: pointer;
+            transition: 0.25s;
+        }
 
-    .lang-box {
-        margin-top: 10px;
-    }
+        button:hover {
+            transform: scale(1.05);
+            background: #e6fff0;
+            color: black;
+        }
 
-    select {
-        padding: 5px 10px;
-        border-radius: 10px;
-        border: 2px solid #888;
-        background: #eef7ff;
-        cursor: pointer;
-        font-size: 14px;
-    }
-</style>
+        .home-btn {
+            background: #6dc5ff;
+        }
 
+        .lang-box {
+            margin-top: 10px;
+        }
+
+        select {
+            padding: 5px 10px;
+            border-radius: 10px;
+            border: 2px solid #888;
+            background: #eef7ff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1 id="title">ForeIUT</h1>
+        <h2 id="welcome" style="font-weight: normal;">Welcome!</h2>
 
-<div class="container">
-    <h1 id="title">ForeIUT</h1>
-    <h2 id="welcome" style="font-weight: normal;">Welcome!</h2>
-
-    <!-- Selecteur de langue -->
-    <div class="lang-box">
-        <select id="langSelect">
-            <option value="en">🌐 English</option>
+        <!-- Selecteur de langue -->
+        <div class="lang-box">
+            <select id="langSelect">
+                <option value="en">🌐 English</option>
             <option value="fr">🇫🇷 Français</option>
-        </select>
-    </div>
-
-    <!-- ANIMAUX EN 3 BLOCS -->
-    <div class="animals-wrapper">
-
-        <!-- Bloc du haut : Abeille -->
-        <div class="top">
-            <img class="animal" src="abeille.jpg">
+            </select>
         </div>
 
-        <!-- Bloc du bas : Poule + Mouton -->
-        <div class="bottom">
-            <img class="animal" src="poule.png">
-            <img class="animal" src="mouton.jpeg">
+        <!-- ANIMAUX EN 3 BLOCS -->
+        <div class="animals-wrapper">
+            <!-- Bloc du haut : Abeille -->
+            <div class="top">
+                <img class="animal" src="abeille.jpg">
+            </div>
+
+            <!-- Bloc du bas : Poule + Mouton -->
+            <div class="bottom">
+                <img class="animal" src="poule.png">
+                <img class="animal" src="mouton.jpeg">
+            </div>
+        </div>
+
+        <!-- BOUTONS -->
+        <div class="button-container">
+            <!-- Bouton Start -->
+            <button id="startBtn">Start!</button>
+
+            <!-- NOUVEAU BOUTON POUR ACCUEIL -->
+            <button id="homeBtn" class="home-btn">Home</button>
         </div>
     </div>
 
-    <!-- Bouton Start -->
-    <button id="startBtn">Start!</button>
-</div>
+    <script>
+        const translations = {
+            en: { welcome: "Welcome!", start: "Start!", home: "Home" },
+            fr: { welcome: "Bienvenue!", start: "Commencer!", home: "Accueil" }
+        };
 
-<script>
-    const translations = {
-        en: { welcome: "Welcome!", start: "Start!" },
-        fr: { welcome: "Bienvenue!", start: "Commencer!" }
-    };
+        const langSelect = document.getElementById("langSelect");
+        const welcome = document.getElementById("welcome");
+        const startBtn = document.getElementById("startBtn");
+        const homeBtn = document.getElementById("homeBtn");
 
-    const langSelect = document.getElementById("langSelect");
-    const welcome = document.getElementById("welcome");
-    const startBtn = document.getElementById("startBtn");
-		
-		langSelect.addEventListener("change", () => {
-    const lang = langSelect.value;
+        // Charger la langue sauvegard�e
+        const savedLang = localStorage.getItem("lang") || "en";
+        langSelect.value = savedLang;
+        updateLanguage(savedLang);
 
-    // Mise à jour sur page 1
-    welcome.textContent = translations[lang].welcome;
-    startBtn.textContent = translations[lang].start;
+        langSelect.addEventListener("change", () => {
+            const lang = langSelect.value;
+            updateLanguage(lang);
+            localStorage.setItem("lang", lang);
+        });
 
-    // 🔥 Sauvegarde
-    localStorage.setItem("lang", lang);
-});
+        function updateLanguage(lang) {
+            welcome.textContent = translations[lang].welcome;
+            startBtn.textContent = translations[lang].start;
+            homeBtn.textContent = translations[lang].home;
+        }
 
+        // Redirection vers page2.html
+        startBtn.addEventListener("click", () => {
+            if (!localStorage.getItem("lang")) {
+                localStorage.setItem("lang", "en");
+            }
+            window.location.href = "page2.html";
+        });
 
-    // Redirection vers page 2
-  startBtn.addEventListener("click", () => {
-    // Sécurité
-    if (!localStorage.getItem("lang")) {
-        localStorage.setItem("lang", "en");
-    }
-    window.location.href = "page2.html";
-});
-</script>
-
+        // Redirection vers la page d'accueil
+        homeBtn.addEventListener("click", () => {
+            window.location.href = "accueil.html";
+        });
+    </script>
 </body>
 </html>

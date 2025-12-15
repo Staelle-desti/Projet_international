@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForeIUT – Saint-Étienne: Place to Go</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #e6f7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 340px;
+    height: 90vh;
+    background: #f8ffff;
+    border-radius: 30px;
+    border: 3px solid #cfeaf5;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    color: #2ecc71;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* CONTENU */
+.content {
+    flex-grow: 1;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+/* MASCOTTE */
+.mascot {
+    width: 90px;
+    align-self: center;
+}
+
+/* ZONE DROITE */
+.right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* BULLE */
+.bubble {
+    background: white;
+    border: 2px solid #6dc5ff;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* BOUTONS */
+.menuBtn {
+    padding: 14px;
+    border-radius: 18px;
+    border: 2px solid #2ecc71;
+    background: #eafff2;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menuBtn:hover {
+    transform: scale(1.05);
+}
+
+/* NAV BAR */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    border-top: 2px solid #cfeaf5;
+    padding-top: 8px;
+}
+
+.navbar div {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+@keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+		
+	.float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+/* CATEGORIES */
+.category {
+    background: white;
+    border: 2px solid #6dc5ff;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.category h3 {
+    margin-top: 0;
+    color: #2ecc71;
+}
+
+.category a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.category a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">Place to Go</div>
+
+    <div class="content">
+        <!-- Mascotte -->
+        <img src="poule.png" class="mascot float" />
+
+        <!-- Contenu -->
+        <div class="right">
+            <div class="bubble">
+                Discover the best places to visit in Saint-Étienne!
+            </div>
+
+            <!-- Catégories -->
+            <div class="category">
+                <h3>🏛 Museums</h3>
+                <a href="https://maps.app.goo.gl/RRdzdCQsvaqRug8VA" target="_blank">Museum of Art and Industry</a>
+            </div>
+
+            <div class="category">
+                <h3>🎬 Cinemas</h3>
+                <a href="https://maps.app.goo.gl/VdaVAiJHxP4vm6SVA" target="_blank">Cinéma Le Mélies Jean-Jaurès</a>
+            </div>
+
+            <div class="category">
+                <h3>☕ Cafés</h3>
+                <a href="https://maps.app.goo.gl/kt7BmcYuZ5Rxaudf7" target="_blank">Comme à la Maison Coffee Shop</a><br>
+                <a href="https://maps.app.goo.gl/dA16d5VKupDibfvo7" target="_blank">Tartatata Café</a>
+            </div>
+
+            <div class="category">
+                <h3>🍽 Restaurants</h3>
+                <a href="https://maps.app.goo.gl/bmuBofMvqzjmtdF87" target="_blank">Wa Bento</a><br>
+                <a href="https://maps.app.goo.gl/M1ZFh274nGVAveQ19" target="_blank">Chez Dada Resto</a><br>
+                <a href="https://maps.app.goo.gl/45uWxSzQacGWcB7T8" target="_blank">Chez Les Fondus</a>
+            </div>
+
+            <div class="category">
+                <h3>🎶 Clubs</h3>
+                <a href="https://maps.app.goo.gl/TMxK4NeoeQFMa4uFA" target="_blank">Club Night</a>
+            </div>
+
+            <div class="category">
+                <h3>🛒 Supermarkets</h3>
+                <a href="https://maps.app.goo.gl/dquomSh447dnFYgd9" target="_blank">Carrefour City</a><br>
+                <a href="https://maps.app.goo.gl/NvL9RCUSs5A4CmDd8" target="_blank">International Store</a><br>
+                <a href="https://maps.app.goo.gl/nftnDZVtssfJJhmR6" target="_blank">LIDL</a><br>
+                <a href="https://maps.app.goo.gl/6cLWNrv8na34jg188" target="_blank">Action</a>
+            </div>
+
+            <div class="category">
+                <h3>🎡 Attractions</h3>
+                <a href="https://maps.app.goo.gl/w3hFznH2joTSCFCf6" target="_blank">Steel</a><br>
+                <a href="https://maps.app.goo.gl/1JQs4V4HSoEPMADi9" target="_blank">Centre Commercial</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav">
+    <button onclick="history.back()">⬅️Return</button>
+	</div>
+</div>
+
+<script>
+function go(page) {
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>

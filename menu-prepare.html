@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForeIUT – Menu</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#e6f7ff;
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:340px;
+    height:100vh;
+    background:#f8ffff;
+    border-radius:30px;
+    border:3px solid #cfeaf5;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+}
+
+h1{
+    color:#2ecc71;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* Boutons menu */
+.menu-btn{
+    padding:18px;
+    margin-bottom:15px;
+    border-radius:20px;
+    border:3px solid #6dc5ff;
+    background:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.menu-btn:hover{
+    transform:scale(1.05);
+    background:#eaf7ff;
+}
+
+.navbar {
+            transform: translateX(-3%);
+            width: 340px;
+            display: flex;
+            justify-content: space-around;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 3px solid #cfeaf5;
+            padding: 10px 10px;
+            margin-top: 10px;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .nav-item span {
+            font-size: 22px;
+            display: block;
+        }
+
+        .nav-item.active {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Menu</h1>
+
+		<button class="menu-btn" onclick="location.href='prepare-appartement.html'">🏠 Apartment</button>
+		<button class="menu-btn" onclick="location.href='prepare-assurance.html'">🛡️ Insurance</button>
+		<button class="menu-btn" onclick="location.href='prepare-visale.html'">📄 Visale</button>
+		<button class="menu-btn" onclick="location.href='prepare-caf.html'">💶 CAF</button>
+		<button class="menu-btn" onclick="location.href='prepare-residence.html'">🏢 Residences</button>
+		<button class="menu-btn" onclick="location.href='prepare-erasmus.html'">✈️ Erasmus / Visa</button>
+		
+    <div class="navbar">
+            <div class="nav-item active" onclick="location.href='news.html'">
+                <span>📰</span> News
+            </div>
+            <div class="nav-item" onclick="location.href='accueil.html'">
+                <span>📚</span> Menu
+            </div>
+            <div class="nav-item" onclick="location.href='map.html'">
+                <span>🗺️</span> IUT Maps
+            </div>
+            <div class="nav-item" onclick="location.href='login.html'">
+                <span>💬</span> Chat
+            </div>
+        </div>
+
+</div>
+</body>
+</html>

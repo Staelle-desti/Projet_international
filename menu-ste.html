@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForeIUT – Saint-Étienne</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #e6f7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 340px;
+    height: 90vh;
+    background: #f8ffff;
+    border-radius: 30px;
+    border: 3px solid #cfeaf5;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    color: #2ecc71;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* CONTENU */
+.content {
+    flex-grow: 1;
+    display: flex;
+    gap: 10px;
+}
+
+/* MASCOTTE */
+.mascot {
+    width: 90px;
+    align-self: center;
+}
+
+/* ZONE DROITE */
+.right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* BULLE */
+.bubble {
+    background: white;
+    border: 2px solid #6dc5ff;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* BOUTONS */
+.menuBtn {
+    padding: 12px;
+    border-radius: 15px;
+    border: 2px solid #2ecc71;
+    background: #eafff2;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+		.float {
+            animation: float 3s ease-in-out infinite;
+        }
+		
+		@keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+		.bee {
+            width: 140px;
+            margin-left: 90px;
+        }
+
+.menuBtn:hover {
+    transform: scale(1.05);
+}
+
+/* Barre navigation */
+.navbar {
+            transform: translateX(-3%);
+            width: 340px;
+            display: flex;
+            justify-content: space-around;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 3px solid #cfeaf5;
+            padding: 10px 10px;
+            margin-top: 5px;
+        }
+
+.nav-item {
+            text-align: center;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .nav-item span {
+            font-size: 22px;
+            display: block;
+        }
+
+        .nav-item.active {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">Saint-Étienne</div>
+
+    
+		<div class="main-area">
+          <img src="abeille.jpg" class="bee float" />
+
+        <!-- Contenu -->
+        <div class="right">
+            <div class="bubble">
+                Here you can discover Saint-Étienne: places, transport, weather and student life.
+            </div>
+
+            <button class="menuBtn" onclick="go('st-map.html')">🗺 Interactive Map</button>
+            <button class="menuBtn" onclick="go('st-place-to-go.html')">📍 Place to Go</button>
+            <button class="menuBtn" onclick="go('st-weather.html')">☀ Weather</button>
+            <button class="menuBtn" onclick="go('st-associations.html')">🎓 Student Association</button>
+        </div>
+    </div>
+
+    <div class="navbar">
+            <div class="nav-item active" onclick="location.href='news.html'">
+                <span>📰</span> News
+            </div>
+            <div class="nav-item" onclick="location.href='accueil.html'">
+                <span>📚</span> Menu
+            </div>
+            <div class="nav-item" onclick="location.href='map.html'">
+                <span>🗺️</span> IUT Maps
+            </div>
+            <div class="nav-item" onclick="location.href='login.html'">
+                <span>💬</span> Chat
+            </div>
+        </div>
+
+</div>
+
+<script>
+function go(page) {
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>

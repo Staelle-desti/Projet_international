@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForeIUT – Student Association</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #e6f7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 340px;
+    height: 90vh;
+    background: #f8ffff;
+    border-radius: 30px;
+    border: 3px solid #cfeaf5;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    color: #2ecc71;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* CONTENU */
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* MASCOTTE */
+.mascot {
+    width: 90px;
+    align-self: center;
+}
+
+/* ZONE DROITE */
+.right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* BULLE */
+.bubble {
+    background: white;
+    border: 2px solid #6dc5ff;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* BOUTONS */
+.menuBtn {
+    padding: 14px;
+    border-radius: 18px;
+    border: 2px solid #2ecc71;
+    background: #eafff2;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menuBtn:hover {
+    transform: scale(1.05);
+}
+
+/* NAV BAR */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    border-top: 2px solid #cfeaf5;
+    padding-top: 8px;
+}
+
+.navbar div {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+@keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+	
+	.float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+/* ASSOCIATIONS */
+.association-container {
+    background: white;
+    border: 2px solid #6dc5ff;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.association-container h3 {
+    margin-top: 0;
+    color: #2ecc71;
+}
+
+.association-container p {
+    margin: 5px 0;
+    text-align: justify;
+}
+
+.association-link {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.association-link:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">Student Association</div>
+
+    <div class="content">
+        <!-- Mascotte -->
+        <img src="poule.png" class="mascot float" />
+
+        <!-- Contenu -->
+        <div class="right">
+            <div class="bubble">
+                Discover student associations at IUT Saint-Étienne!
+            </div>
+
+            <!-- LaBoge -->
+            <div class="association-container">
+                <h3>🌟 LaBoge</h3>
+                <p>
+                    <strong>LaBoge</strong> is an organization focused on innovation, research, and education.
+                    Its mission is to promote collaboration and support learning among students.
+                    LaBoge aims to foster creativity and provide resources to help students succeed in their projects.
+                </p>
+                <p>
+                    <a class="association-link" href="https://laboge.fr" target="_blank">
+                        Visit LaBoge Website
+                    </a>
+                </p>
+            </div>
+
+            <!-- ESN -->
+            <div class="association-container">
+                <h3>🌍 Erasmus Student Network (ESN)</h3>
+                <p>
+                    <strong>ESN</strong> (Erasmus Student Network) is a Europe-wide student organization that supports and connects international students.
+                    Its main goal is to enhance student mobility by providing social, cultural, and academic support.
+                    ESN helps students integrate into new environments and make the most of their international experience through events, trips, and mentorship programs.
+                </p>
+                <p>
+                    <a class="association-link" href="https://esn.org" target="_blank">
+                        Visit ESN Website
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav">
+    <button onclick="history.back()">⬅️Return</button>
+	</div>
+</div>
+
+<script>
+function go(page) {
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>

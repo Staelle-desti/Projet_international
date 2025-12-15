@@ -10,9 +10,8 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: "Comic Sans MS", cursive;
+            font-family: Arial, sans-serif;
             background: #e6f7ff;
             margin: 0;
             height: 100vh;
@@ -21,8 +20,6 @@
             align-items: center;
             overflow: hidden;
         }
-
-        /* MAIN APP */
         .app {
             width: 360px;
             height: 90vh;
@@ -35,17 +32,15 @@
             display: flex;
             flex-direction: column;
         }
-
-        /* TOP BAR */
         .topBar {
             height: 55px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 0 15px;
             background: #f8ffff;
             z-index: 10;
         }
-
         #menuBtn {
             background: #2ecc71;
             color: white;
@@ -57,29 +52,78 @@
             cursor: pointer;
             z-index: 10;
         }
-
-        /* CONTENT AREA */
+        #roomsBtn {
+            background: #6dc5ff;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        #addRoomBtn {
+            position: fixed;
+            bottom: 110px;
+            left: 510px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .roomsModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .roomsContent {
+            background: white;
+            width: 300px;
+            max-height: 400px;
+            border-radius: 20px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .roomItem {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f0f9ff;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid #6dc5ff;
+        }
+        .roomItem:hover {
+            background: #e3f7ff;
+        }
         .content {
             flex: 1;
             overflow: hidden;
             position: relative;
         }
-
-        /* CHAT */
         #chatView {
             height: 100%;
             display: flex;
             flex-direction: column;
             padding-bottom: 60px;
         }
-
         #messages {
             flex: 1;
             padding: 15px;
             overflow-y: auto;
             background: #f0f9ff;
         }
-
         .bubble {
             max-width: 75%;
             background: white;
@@ -88,15 +132,22 @@
             border: 2px solid #6dc5ff;
             margin-bottom: 10px;
             word-wrap: break-word;
+            position: relative;
         }
-
+        .likeBtn {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
         .me {
             background: #d9ffe2;
             border-color: #2ecc71;
             margin-left: auto;
         }
-
-        /* INPUT */
         .inputRow {
             position: absolute;
             bottom: 0;
@@ -108,7 +159,6 @@
             background: #f8ffff;
             border-top: 1px solid #cfeaf5;
         }
-
         .inputRow input {
             flex: 1;
             padding: 10px;
@@ -116,7 +166,6 @@
             border: 2px solid #6dc5ff;
             outline: none;
         }
-
         .sendBtn {
             width: 45px;
             height: 45px;
@@ -127,8 +176,6 @@
             font-size: 18px;
             cursor: pointer;
         }
-
-        /* SIDE MENU */
         .sideMenu {
             position: absolute;
             top: 0;
@@ -142,17 +189,14 @@
             padding: 20px;
             box-shadow: 5px 0 15px rgba(0,0,0,0.1);
         }
-
         .sideMenu.open {
             transform: translateX(0);
         }
-
         .sideMenu h2 {
             text-align: center;
             color: #2ecc71;
             margin-bottom: 20px;
         }
-
         .menuItem {
             margin-bottom: 15px;
             padding: 12px;
@@ -164,13 +208,10 @@
             transition: all 0.2s;
             font-size: 16px;
         }
-
         .menuItem:hover {
             background: #e3f7ff;
             transform: scale(1.02);
         }
-
-        /* OVERLAY */
         .overlay {
             position: absolute;
             top: 0;
@@ -183,167 +224,280 @@
             pointer-events: none;
             transition: opacity 0.35s ease;
         }
-
         .overlay.active {
             opacity: 1;
             pointer-events: all;
         }
-
-        /* PAGES */
         .page {
             display: none;
             padding: 20px;
             height: 100%;
             overflow-y: auto;
         }
-
         .page.active {
             display: block;
         }
-
         .page h3 {
             margin-bottom: 15px;
             color: #2ecc71;
         }
+        .pointsDisplay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: 1px solid #2ecc71;
+            font-size: 14px;
+            z-index: 10;
+        }
+        .roomTitle {
+            text-align: center;
+            padding: 10px;
+            background: #f8ffff;
+            border-bottom: 1px solid #cfeaf5;
+            font-weight: bold;
+            color: #2ecc71;
+        }
     </style>
 </head>
-
 <body>
-
-<div class="app">
-    <!-- OVERLAY -->
-    <div class="overlay" id="overlay"></div>
-
-    <!-- TOP BAR -->
-    <div class="topBar">
-        <button id="menuBtn">☰</button>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="content">
-        <!-- CHAT -->
-        <div id="chatView" class="page active">
-            <div id="messages"></div>
-
-            <div class="inputRow">
-                <input type="text" id="msgInput" placeholder="Write a message">
-                <button class="sendBtn" onclick="sendMessage()">➤</button>
+    <div class="app">
+        <div class="overlay" id="overlay"></div>
+        <div class="pointsDisplay">⭐ Points: <span id="points">0</span></div>
+        <div class="topBar">
+            <button id="menuBtn">☰</button>
+            <button id="roomsBtn">🏠 Rooms</button>
+        </div>
+        <div class="roomTitle" id="roomTitle">General</div>
+		
+        <button id="addRoomBtn">+</button>
+		
+        <div class="content">
+            <div id="chatView" class="page active">
+                <div id="messages"></div>
+                <div class="inputRow">
+                    <input type="text" id="msgInput" placeholder="Write a message">
+                    <button class="sendBtn" onclick="sendMessage()">➤</button>
+                </div>
+            </div>
+            <div id="profilePage" class="page">
+                <h3>👤 Profile</h3>
+                <p>User: <span id="userName"></span></p>
+            </div>
+            <div id="notifPage" class="page">
+                <h3>🔔 Notifications</h3>
+                <p>No notifications yet</p>
+            </div>
+            <div id="settingsPage" class="page">
+                <h3>⚙ Settings</h3>
+                <button onclick="logout()">Logout</button>
             </div>
         </div>
-
-        <!-- PROFILE -->
-        <div id="profilePage" class="page">
-            <h3>👤 Profile</h3>
-            <p>User: <span id="userName"></span></p>
+        <div class="roomsModal" id="roomsModal">
+            <div class="roomsContent">
+                <h3>Join a Room</h3>
+                <div id="roomList"></div>
+                <button onclick="document.getElementById('roomsModal').style.display='none'">Close</button>
+            </div>
         </div>
-
-        <!-- NOTIFICATIONS -->
-        <div id="notifPage" class="page">
-            <h3>🔔 Notifications</h3>
-            <p>No notifications yet</p>
-        </div>
-
-        <!-- SETTINGS -->
-        <div id="settingsPage" class="page">
-            <h3>⚙ Settings</h3>
-            <button onclick="logout()">Logout</button>
+        <div class="sideMenu" id="sideMenu">
+            <h2>Menu</h2>
+            <div class="menuItem" onclick="openPage('chat')">💬 Chat</div>
+            <div class="menuItem" onclick="openPage('profile')">👤 Profile</div>
+            <div class="menuItem" onclick="openPage('notif')">🔔 Notifications</div>
+            <div class="menuItem" onclick="openPage('settings')">⚙ Settings</div>
+			<button class="menu-btn" onclick="location.href='accueil.html'">🏠Exit</button>
+            <!-- <div class="menuItem" style="background: #ff6b6b; color: white;" onclick="resetAllData()">🗑️ Reset All</div> -->
         </div>
     </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getDatabase, ref, push, onChildAdded, update, onValue, set, remove } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
 
-    <!-- SIDE MENU -->
-    <div class="sideMenu" id="sideMenu">
-        <h2>Menu</h2>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBGhwmJ3eSKbLp2k0qXzbOBgETzNdJlfl8",
+            authDomain: "chat-iut-fore.firebaseapp.com",
+            databaseURL: "https://chat-iut-fore-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "chat-iut-fore",
+            storageBucket: "chat-iut-fore.firebasestorage.app",
+            messagingSenderId: "483691459636",
+            appId: "1:483691459636:web:af6702985b2db17a960661",
+            measurementId: "G-JS13BLK00Y"
+        };
 
-        <div class="menuItem" onclick="openPage('chat')">💬 Chat</div>
-        <div class="menuItem" onclick="openPage('profile')">👤 Profile</div>
-        <div class="menuItem" onclick="openPage('notif')">🔔 Notifications</div>
-        <div class="menuItem" onclick="openPage('settings')">⚙ Settings</div>
-    </div>
-</div>
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app);
 
-<!-- FIREBASE CHAT -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+        let currentRoomId = "general";
+        let currentRoomName = "General";
+        let points = parseInt(localStorage.getItem("points")) || 0;
+        document.getElementById("points").textContent = points;
+        document.getElementById("roomTitle").textContent = currentRoomName;
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyBmVOHOHR7zOotXGQDn6jbugAMdUurVwnQ",
-        authDomain: "iutfore.firebaseapp.com",
-        projectId: "iutfore",
-        storageBucket: "iutfore.firebasestorage.app",
-        messagingSenderId: "942183391896",
-        appId: "1:942183391896:web:b74b86fb01a5973c80a6ed"
-    };
+        const name = localStorage.getItem("chatName") || "Anonymous";
+        document.getElementById("userName").textContent = name;
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+        // Initialise les points de l'utilisateur dans Firebase
+        if (name !== "Anonymous") {
+            const userRef = ref(db, `users/${name}`);
+            onValue(userRef, (snapshot) => {
+                if (!snapshot.exists()) {
+                    set(userRef, { points: 0 });
+                } else {
+                    points = snapshot.val().points || 0;
+                    localStorage.setItem("points", points);
+                    document.getElementById("points").textContent = points;
+                }
+            });
+        }
 
-    const name = localStorage.getItem("chatName") || "Anonymous";
-    document.getElementById("userName").textContent = name;
-    const msgRef = ref(db, "messages");
+        // Écoute les changements de points en temps réel
+        if (name !== "Anonymous") {
+            const userPointsRef = ref(db, `users/${name}/points`);
+            onValue(userPointsRef, (snapshot) => {
+                const userPoints = snapshot.val() || 0;
+                points = userPoints;
+                localStorage.setItem("points", userPoints);
+                document.getElementById("points").textContent = userPoints;
+            });
+        }
 
-    onChildAdded(msgRef, (snap) => {
-        const data = snap.val();
-        showMessage(data.name, data.message);
-    });
+        function loadRooms() {
+            const roomsRef = ref(db, "rooms");
+            onValue(roomsRef, (snapshot) => {
+                const rooms = snapshot.val() || {};
+                const roomList = document.getElementById("roomList");
+                roomList.innerHTML = "";
 
-    window.sendMessage = function() {
-        const input = document.getElementById("msgInput");
-        if (!input.value.trim()) return;
+                const generalRoom = document.createElement("div");
+                generalRoom.className = "roomItem";
+                generalRoom.textContent = "General";
+                generalRoom.onclick = () => joinRoom("general");
+                roomList.appendChild(generalRoom);
 
-        push(msgRef, {
-            name: name,
-            message: input.value
+                for (const roomId in rooms) {
+                    const roomName = rooms[roomId].name;
+                    const roomItem = document.createElement("div");
+                    roomItem.className = "roomItem";
+                    roomItem.textContent = roomName;
+                    roomItem.onclick = () => joinRoom(roomId, roomName);
+                    roomList.appendChild(roomItem);
+                }
+            });
+        }
+
+        function loadMessages(roomId) {
+            messages.innerHTML = "";
+            const messagesRef = ref(db, `rooms/${roomId}/messages`);
+            onChildAdded(messagesRef, (snap) => {
+                const data = snap.val();
+                showMessage(data.name, data.message, snap.key, data.likes || 0);
+            });
+        }
+
+        function showMessage(sender, msg, msgId, likes) {
+            const div = document.createElement("div");
+            div.className = "bubble" + (sender === name ? " me" : "");
+            div.innerHTML = `
+                <b>${sender}</b><br>${msg}
+                <button class="likeBtn" onclick="likeMessage('${currentRoomId}', '${msgId}', '${sender}')">❤ ${likes}</button>
+            `;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        window.sendMessage = function() {
+            const input = document.getElementById("msgInput");
+            if (!input.value.trim()) return;
+            push(ref(db, `rooms/${currentRoomId}/messages`), {
+                name: name,
+                message: input.value,
+                likes: 0
+            });
+            input.value = "";
+        };
+
+        window.likeMessage = function(roomId, msgId, sender) {
+            const likeRef = ref(db, `rooms/${roomId}/messages/${msgId}/likes`);
+            update(likeRef, (currentLikes) => (currentLikes || 0) + 1);
+
+            if (sender !== name) {
+                const senderPointsRef = ref(db, `users/${sender}/points`);
+                update(senderPointsRef, (currentPoints) => (currentPoints || 0) + 1);
+            }
+        };
+
+        window.joinRoom = function(roomId, roomName) {
+            currentRoomId = roomId;
+            currentRoomName = roomName;
+            document.getElementById("roomTitle").textContent = roomName;
+            document.getElementById("roomsModal").style.display = "none";
+            loadMessages(roomId);
+        };
+
+        document.getElementById("addRoomBtn").addEventListener("click", () => {
+            const roomName = prompt("Enter the name of the new room:");
+            if (roomName) {
+                const newRoomRef = push(ref(db, "rooms"));
+                set(newRoomRef, { name: roomName, createdAt: Date.now() });
+            }
         });
 
-        input.value = "";
-    };
+        document.getElementById("roomsBtn").addEventListener("click", () => {
+            loadRooms();
+            document.getElementById("roomsModal").style.display = "flex";
+        });
 
-    function showMessage(sender, msg) {
-        const div = document.createElement("div");
-        div.className = "bubble" + (sender === name ? " me" : "");
-        div.innerHTML = `<b>${sender}</b><br>${msg}`;
-        messages.appendChild(div);
-        messages.scrollTop = messages.scrollHeight;
-    }
-</script>
+        window.resetAllData = function() {
+            if (confirm("Delete ALL rooms and messages? This cannot be undone!")) {
+                set(ref(db, "rooms"), { general: { name: "General", createdAt: Date.now() } })
+                    .then(() => {
+                        alert("All data reset!");
+                        currentRoomId = "general";
+                        currentRoomName = "General";
+                        document.getElementById("roomTitle").textContent = "General";
+                        loadMessages("general");
+                    })
+                    .catch((error) => alert("Error: " + error));
+            }
+        };
 
-<!-- NAV LOGIC -->
-<script>
-    const menu = document.getElementById("sideMenu");
-    const btn = document.getElementById("menuBtn");
-    const overlay = document.getElementById("overlay");
+        loadRooms();
+        loadMessages(currentRoomId);
 
-    btn.onclick = () => {
-        menu.classList.toggle("open");
-        overlay.classList.toggle("active");
-    };
+        const menu = document.getElementById("sideMenu");
+        const btn = document.getElementById("menuBtn");
+        const overlay = document.getElementById("overlay");
 
-    overlay.onclick = () => {
-        menu.classList.remove("open");
-        overlay.classList.remove("active");
-    };
+        btn.onclick = () => {
+            menu.classList.toggle("open");
+            overlay.classList.toggle("active");
+        };
 
-    function openPage(page) {
-        document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-        document.getElementById(page + "Page").classList.add("active");
+        overlay.onclick = () => {
+            menu.classList.remove("open");
+            overlay.classList.remove("active");
+        };
 
-        menu.classList.remove("open");
-        overlay.classList.remove("active");
-    }
-
-    function logout() {
-        localStorage.clear();
-        window.location.href = "index.html";
-    }
-
-    // Allow sending message with Enter key
-    document.getElementById("msgInput").addEventListener("keypress", function(e) {
-        if (e.key === "Enter") {
-            sendMessage();
+        function openPage(page) {
+            document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+            document.getElementById(page + "Page").classList.add("active");
+            menu.classList.remove("open");
+            overlay.classList.remove("active");
         }
-    });
-</script>
 
+        function logout() {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+
+        document.getElementById("msgInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
 </body>
 </html>

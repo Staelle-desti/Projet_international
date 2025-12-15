@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZApp – Chat</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family: "Comic Sans MS", cursive;
+    background:#e6f7ff;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.app{
+    width:360px;
+    height:90vh;
+    background:#f8ffff;
+    border-radius:30px;
+    border:3px solid #cfeaf5;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+}
+.topBar{
+    height:55px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 15px;
+}
+#menuBtn{
+    width:42px;height:42px;
+    border-radius:50%;
+    border:none;
+    background:#2ecc71;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+#roomsBtn{
+    background:#6dc5ff;
+    color:white;
+    border:none;
+    border-radius:15px;
+    padding:8px 12px;
+    cursor:pointer;
+}
+.roomTitle{
+    text-align:center;
+    font-weight:bold;
+    color:#2ecc71;
+    padding:8px;
+}
+.points{
+    position:absolute;
+    top:10px;right:10px;
+    background:white;
+    padding:4px 10px;
+    border-radius:15px;
+    border:1px solid #2ecc71;
+    font-size:14px;
+}
+#messages{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
+    background:#f0f9ff;
+}
+.bubble{
+    max-width:75%;
+    background:white;
+    border:2px solid #6dc5ff;
+    border-radius:20px;
+    padding:10px 15px;
+    margin-bottom:10px;
+    position:relative;
+}
+.me{
+    background:#d9ffe2;
+    border-color:#2ecc71;
+    margin-left:auto;
+}
+.likeBtn{
+    background:none;
+    border:none;
+    cursor:pointer;
+    position:absolute;
+    bottom:5px;right:8px;
+}
+.inputRow{
+    display:flex;
+    padding:10px;
+    gap:10px;
+    border-top:1px solid #cfeaf5;
+}
+.inputRow input{
+    flex:1;
+    padding:10px;
+    border-radius:15px;
+    border:2px solid #6dc5ff;
+}
+.sendBtn{
+    width:45px;height:45px;
+    border-radius:50%;
+    border:none;
+    background:#2ecc71;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+#addRoomBtn{
+    position:absolute;
+    bottom:70px;left:15px;
+    width:50px;height:50px;
+    border-radius:50%;
+    background:#2ecc71;
+    color:white;
+    font-size:24px;
+    border:none;
+    cursor:pointer;
+}
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.3);
+    display:none;
+}
+.overlay.active{display:block}
+.sideMenu{
+    position:absolute;
+    top:0;left:0;
+    width:70%;
+    height:100%;
+    background:#f1fbff;
+    transform:translateX(-100%);
+    transition:.35s;
+    padding:20px;
+    z-index:20;
+}
+.sideMenu.open{transform:translateX(0)}
+.menuItem{
+    padding:12px;
+    margin-bottom:15px;
+    background:white;
+    border:2px solid #6dc5ff;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+}
+.menuItem.exit{
+    background:#ffb703;
+}
+.roomsModal{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+.roomsContent{
+    background:white;
+    width:280px;
+    padding:20px;
+    border-radius:20px;
+}
+.roomItem{
+    padding:10px;
+    margin-bottom:8px;
+    background:#eaf7ff;
+    border-radius:10px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<div class="overlay" id="overlay"></div>
+<div class="points">⭐ <span id="points">0</span></div>
+
+<div class="topBar">
+    <button id="menuBtn">☰</button>
+    <button id="roomsBtn">🏠 Rooms</button>
+</div>
+
+<div class="roomTitle" id="roomTitle">International Chat</div>
+
+<div id="messages"></div>
+
+<div class="inputRow">
+    <input id="msgInput" placeholder="Write a message">
+    <button class="sendBtn" onclick="sendMessage()">➤</button>
+</div>
+
+<button id="addRoomBtn">+</button>
+
+<div class="sideMenu" id="sideMenu">
+    <div class="menuItem">👤 Profile</div>
+    <div class="menuItem">🔔 Notifications</div>
+    <div class="menuItem">⚙ Settings</div>
+    <div class="menuItem exit" onclick="goHome()">🏠 Exit</div>
+</div>
+
+<div class="roomsModal" id="roomsModal">
+    <div class="roomsContent">
+        <h3>Rooms</h3>
+        <div id="roomList"></div>
+        <button onclick="closeRooms()">Close</button>
+    </div>
+</div>
+
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import {getDatabase,ref,push,onChildAdded,onValue,set,update} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+const firebaseConfig = {
+ apiKey:"AIzaSyBGhwmJ3eSKbLp2k0qXzbOBgETzNdJlfl8",
+ authDomain:"chat-iut-fore.firebaseapp.com",
+ databaseURL:"https://chat-iut-fore-default-rtdb.europe-west1.firebasedatabase.app",
+ projectId:"chat-iut-fore",
+ storageBucket:"chat-iut-fore.appspot.com",
+ messagingSenderId:"483691459636",
+ appId:"1:483691459636:web:af6702985b2db17a960661"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const FIXED_ROOMS={
+ international:"International Chat",
+ football:"Football Club",
+ korean:"Korean Chat"
+};
+
+let currentRoom="international";
+const name=localStorage.getItem("chatName")||"Guest";
+let points=parseInt(localStorage.getItem("points"))||0;
+document.getElementById("points").textContent=points;
+
+function initRooms(){
+ onValue(ref(db,"rooms"),snap=>{
+   if(!snap.exists()){
+     for(const id in FIXED_ROOMS){
+       set(ref(db,"rooms/"+id),{name:FIXED_ROOMS[id]});
+     }
+   }
+ },{onlyOnce:true});
+}
+
+function loadRooms(){
+ onValue(ref(db,"rooms"),snap=>{
+   roomList.innerHTML="";
+   snap.forEach(r=>{
+     const div=document.createElement("div");
+     div.className="roomItem";
+     div.textContent=r.val().name;
+     div.onclick=()=>joinRoom(r.key,r.val().name);
+     roomList.appendChild(div);
+   });
+ });
+}
+
+function joinRoom(id,name){
+ currentRoom=id;
+ roomTitle.textContent=name;
+ roomsModal.style.display="none";
+ messages.innerHTML="";
+ loadMessages();
+}
+
+function loadMessages(){
+ onChildAdded(ref(db,"rooms/"+currentRoom+"/messages"),snap=>{
+   const d=snap.val();
+   const b=document.createElement("div");
+   b.className="bubble"+(d.name===name?" me":"");
+   b.innerHTML=`<b>${d.name}</b><br>${d.message}
+   <button class="likeBtn" onclick="like('${snap.key}','${d.name}')">❤ ${d.likes||0}</button>`;
+   messages.appendChild(b);
+   messages.scrollTop=messages.scrollHeight;
+ });
+}
+
+window.sendMessage=()=>{
+ const t=msgInput.value.trim();
+ if(!t)return;
+ push(ref(db,"rooms/"+currentRoom+"/messages"),{
+   name,message:t,likes:0
+ });
+ msgInput.value="";
+};
+
+window.like=(id,sender)=>{
+ update(ref(db,"rooms/"+currentRoom+"/messages/"+id+"/likes"),l=>(l||0)+1);
+ if(sender!==name){
+   points++;
+   localStorage.setItem("points",points);
+   document.getElementById("points").textContent=points;
+ }
+};
+
+menuBtn.onclick=()=>{
+ sideMenu.classList.toggle("open");
+ overlay.classList.toggle("active");
+};
+overlay.onclick=()=>{sideMenu.classList.remove("open");overlay.classList.remove("active");};
+
+roomsBtn.onclick=()=>{roomsModal.style.display="flex";loadRooms();};
+function closeRooms(){roomsModal.style.display="none";}
+
+addRoomBtn.onclick=()=>{
+ const n=prompt("Room name?");
+ if(n) push(ref(db,"rooms"),{name:n});
+};
+
+window.goHome=()=>window.location.href="home.html";
+
+initRooms();
+loadRooms();
+loadMessages();
+</script>
+</body>
+</html>

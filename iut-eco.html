@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUT – Eco Campus</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#e6f7ff;
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:340px;
+    height:90vh;
+    background:#f8ffff;
+    border-radius:30px;
+    border:3px solid #cfeaf5;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+}
+
+h1{
+    text-align:center;
+    color:#2ecc71;
+}
+
+.card{
+    background:white;
+    border:2px solid #6dc5ff;
+    border-radius:20px;
+    padding:12px;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+.points{
+    background:#d9ffe2;
+    border:2px solid #2ecc71;
+    text-align:center;
+    font-size:16px;
+}
+
+.scan-btn{
+    padding:14px;
+    border-radius:40px;
+    border:none;
+    background:#2ecc71;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-bottom:5px;
+}
+
+#reader{
+    width:100%;
+    border-radius:15px;
+    overflow:hidden;
+    display:none;
+}
+
+.nav{
+    margin-top:auto;
+    display:flex;
+    justify-content:space-around;
+    border-top:2px solid #cfeaf5;
+    padding-top:10px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>🌱 Eco Campus</h1>
+
+<div class="card points">
+🎯 Points earned: <b><span id="points">0</span></b>
+</div>
+
+<button class="scan-btn" onclick="startScan()">📷 Scan QR Code</button>
+
+<div id="reader"></div>
+
+<div class="card">
+🐝 Beehives – biodiversity
+</div>
+<div class="card">
+🐑 Sheep – eco farming
+</div>
+<div class="card">
+🐔 Chickens – waste reduction
+</div>
+<div class="card">
+🚲 Electric bikes – green mobility
+</div>
+
+<div class="nav">
+    <button onclick="history.back()">⬅️</button>
+</div>
+
+</div>
+
+<!-- QR SCANNER LIBRARY -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+let points = parseInt(localStorage.getItem("ecoPoints")) || 0;
+let scanned = JSON.parse(localStorage.getItem("scannedQR")) || [];
+
+document.getElementById("points").textContent = points;
+
+function startScan(){
+    document.getElementById("reader").style.display = "block";
+
+    const html5QrCode = new Html5Qrcode("reader");
+
+    html5QrCode.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: 200 },
+        qrCodeMessage => {
+            if(scanned.includes(qrCodeMessage)){
+                alert("QR already scanned ✔️");
+            } else {
+                scanned.push(qrCodeMessage);
+                points++;
+                localStorage.setItem("ecoPoints", points);
+                localStorage.setItem("scannedQR", JSON.stringify(scanned));
+                document.getElementById("points").textContent = points;
+                alert("🎉 +1 point earned!");
+            }
+            html5QrCode.stop();
+            document.getElementById("reader").style.display = "none";
+        }
+    );
+}
+</script>
+
+</body>
+</html>

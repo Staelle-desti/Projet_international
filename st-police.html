@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForeIUT – Saint-Étienne Map</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #e6f7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 340px;
+    height: 90vh;
+    background: #f8ffff;
+    border-radius: 30px;
+    border: 3px solid #cfeaf5;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    color: #2ecc71;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* CONTENU */
+.content {
+    flex-grow: 1;
+    display: flex;
+    gap: 10px;
+}
+
+/* MASCOTTE */
+.mascot {
+    width: 120px;
+    align-self: center;
+}
+
+/* ZONE DROITE */
+.right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* BULLE */
+.bubble {
+    background: white;
+    border: 2px solid #6dc5ff;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* BOUTONS */
+.menuBtn {
+    padding: 14px;
+    border-radius: 18px;
+    border: 2px solid #2ecc71;
+    background: #eafff2;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menuBtn:hover {
+    transform: scale(1.05);
+}
+	.float {
+            animation: float 3s ease-in-out infinite;
+        }
+		
+		@keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+		
+/* NAV BAR */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    border-top: 2px solid #cfeaf5;
+    padding-top: 8px;
+}
+
+.navbar div {
+    font-size: 14px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header">Police / Authorities</div>
+    <div class="content">
+        <img src="abeille.jpg" class="mascot float" />
+        <div class="right">
+            <div class="bubble">
+                In case of emergency, contact the National Police or the Préfecture de Loire.
+            </div>
+            <div class="bubble">
+				📞 National Police: 17<br>
+				📍 Préfecture de Loire: <a href="https://maps.app.goo.gl/UbrBpwuDcMWvATi77" target="_blank">2 Rue Charles de Gaulle, 42000 Saint-Étienne</a>
+			</div>
+
+			<img src="police-secours.png" style="width: 100%; border-radius: 10px">
+        </div>
+		
+    </div>
+
+    <div class="navbar">
+    <button onclick="history.back()">⬅️ Return</button>
+</div>
+</div>
+
+
+<script>
+function go(page) {
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>

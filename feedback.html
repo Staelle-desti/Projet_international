@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForeIUT – Feedback</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #e6f7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 340px;
+    height: 90vh;
+    background: #f8ffff;
+    border-radius: 30px;
+    border: 3px solid #cfeaf5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+h1 {
+    color: #2ecc71;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.feedback-form {
+    background: white;
+    border: 2px solid #6dc5ff;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.feedback-form button {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #2ecc71;
+    background: #eafff2;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.feedback-form button:hover {
+    transform: scale(1.05);
+}
+
+.nav {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-around;
+    border-top: 2px solid #cfeaf5;
+    padding-top: 10px;
+}
+
+.nav button {
+    background: #b3e5ff;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>💬 Feedback</h1>
+
+    <div class="feedback-form">
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" rows="4" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav">
+    <button onclick="history.back()">Return</button>
+	</div>
+</div>
+</body>
+</html>

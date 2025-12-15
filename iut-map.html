@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUT – Campus Map</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#e6f7ff;
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:340px;
+    height:90vh;
+    background:#f8ffff;
+    border-radius:30px;
+    border:3px solid #cfeaf5;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+}
+
+h1{
+    text-align:center;
+    color:#2ecc71;
+    margin-bottom:10px;
+}
+
+.card{
+    background:white;
+    border:2px solid #6dc5ff;
+    border-radius:20px;
+    padding:12px;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+.map-box{
+    border-radius:20px;
+    overflow:hidden;
+    border:2px solid #6dc5ff;
+    margin-bottom:1px;
+}
+
+.scan-btn{
+    padding:14px;
+    border-radius:20px;
+    border:none;
+    background:#2ecc71;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-bottom:12px;
+}
+
+.scan-btn:hover{
+    transform:scale(1.05);
+}
+
+.nav{
+    margin-top:auto;
+    display:flex;
+    justify-content:space-around;
+    border-top:1px solid #cfeaf5;
+    padding-top:10px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>🗺️ IUT Campus Map</h1>
+
+<div class="card">
+📍 This map shows the IUT Saint-Étienne campus.<br>
+Zoom in to explore buildings, services and eco areas.
+</div>
+
+<div class="map-box">
+<iframe 
+    src="https://www.google.com/maps?q=IUT%20Saint%20Etienne&output=embed"
+    width="100%" 
+    height="400" 
+    style="border:0;" 
+    loading="lazy">
+</iframe>
+</div>
+
+<div class="card">
+🌱 <b>Eco Campus QR Codes</b><br><br>
+You can find QR codes near eco-friendly places:
+• Beehives<br>
+• Sheep & chicken areas<br>
+• Green spaces<br>
+• Electric bikes<br><br>
+Scan them to earn points!
+</div>
+
+<button class="scan-btn" onclick="location.href='iut-eco.html'">
+📷 Scan Eco QR Code
+</button>
+
+<div class="nav">
+    <button onclick="history.back()">⬅️</button>
+</div>
+
+</div>
+</body>
+</html>

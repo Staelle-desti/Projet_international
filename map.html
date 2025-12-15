@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IUT Map</title>
-
     <style>
         body {
             margin: 0;
-            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-family: Arial, sans-serif;
             background: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
-
         .container {
             width: 340px;
             background: #f8ffff;
@@ -28,19 +26,16 @@
             flex-direction: column;
             height: 90vh;
         }
-
         .bee {
             width: 150px;
             margin: 10px auto;
             animation: float 3s infinite ease-in-out;
         }
-
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
             100% { transform: translateY(0); }
         }
-
         .bubble {
             background: #ffffff;
             border: 2px solid #000;
@@ -51,24 +46,24 @@
             font-size: 14px;
             max-width: 260px;
         }
-
         #map {
             width: 100%;
-            height: 55vh;
+            height: 50vh;
             border-radius: 20px;
             border: 2px solid #cfeaf5;
             background: #e8f3ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            font-size: 14px;
             margin-bottom: 10px;
         }
-
-        /* Barre de navigation */
+        #reset-map {
+            margin: 5px auto;
+            padding: 5px 10px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
         .navbar {
-            
             transform: translateX(-3%);
             width: 340px;
             display: flex;
@@ -78,18 +73,15 @@
             border: 3px solid #cfeaf5;
             padding: 10px 0;
         }
-
         .nav-item {
             text-align: center;
             font-size: 13px;
             cursor: pointer;
         }
-
         .nav-item span {
             font-size: 22px;
             display: block;
         }
-
         .nav-item.active {
             color: #2ecc71;
             font-weight: bold;
@@ -98,22 +90,15 @@
 </head>
 
 <body>
-
-<div class="container">
-
-    <!-- Mascotte -->
-    <img src="logo.png" class="bee">
-
-    <!-- Bulle d’intro -->
-    <div class="bubble">
-        Here you can explore the IUT Campus!  
-        Click markers to learn more.
-    </div>
-
-    <!-- Carte Google -->
-    <div id="map">Map loading…</div>
-
-    <!-- Navigation bas -->
+    <div class="container">
+        <img src="logo.png" class="bee">
+        <div class="bubble">
+            Explore the IUT Campus!
+            <strong>Zoom in</strong> to see buildings.
+            Click markers for details.
+        </div>
+        <div id="map">Map loading…</div>
+        <button id="reset-map">View Entire Campus</button>
         <div class="navbar">
             <div class="nav-item active" onclick="location.href='news.html'">
                 <span>📰</span> News
@@ -128,52 +113,78 @@
                 <span>💬</span> Chat
             </div>
         </div>
+    </div>
 
-</div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtK2CkQk0wf1GD84Cbs_M4XLhDxSmBFqA&callback=initMap" async defer></script>
 
-<!-- Google Maps Script -->
-
- 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtK2CkQk0wf1GD84Cbs_M4XLhDxSmBFqA&callback=initMap" async defer></script>
-
-<script>
-function initMap() {
-    const iut = { lat: 45.4397, lng: 4.3872 }; 
-
-    const map = new google.maps.Map(document.getElementById("map"), {
-        center: iut,
-        zoom: 17,
-        mapId: "4504f8b37365c3d0" // style Google Map simple et moderne
-    });
-
-    const locations = [
-        { name: "IUT Jean Monnet – Main Entrance", position: { lat: 45.4397, lng: 4.3872 } },
-        { name: "Building A", position: { lat: 45.4399, lng: 4.3867 } },
-        { name: "Building B", position: { lat: 45.4394, lng: 4.3869 } },
-        { name: "Building C", position: { lat: 45.4391, lng: 4.3875 } },
-        { name: "Administration – Office", position: { lat: 45.4396, lng: 4.3879 } },
-        { name: "CROUS Cafeteria", position: { lat: 45.4389, lng: 4.3871 } },
-        { name: "Student Parking", position: { lat: 45.4387, lng: 4.3866 } },
-        { name: "Bus Stop – Métare", position: { lat: 45.4393, lng: 4.3883 } }
-    ];
-
-    locations.forEach(loc => {
-        const marker = new google.maps.Marker({
-            position: loc.position,
-            map: map,
-            title: loc.name
+    <script>
+    function initMap() {
+        const iut = { lat: 45.4397, lng: 4.3872 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: iut,
+            zoom: 15,
+            mapId: "4504f8b37365c3d0"
         });
 
-        const info = new google.maps.InfoWindow({
-            content: `<strong>${loc.name}</strong>`
+        const locations = [
+            { name: "IUT Jean Monnet – Main Entrance", position: { lat: 45.4397, lng: 4.3872 } },
+            { name: "Building A", position: { lat: 45.4399, lng: 4.3867 } },
+            { name: "Building B", position: { lat: 45.4394, lng: 4.3869 } },
+            { name: "Building C", position: { lat: 45.4391, lng: 4.3875 } },
+            { name: "Administration – Office", position: { lat: 45.4396, lng: 4.3879 } },
+            { name: "CROUS Cafeteria", position: { lat: 45.4389, lng: 4.3871 } },
+            { name: "Student Parking", position: { lat: 45.4387, lng: 4.3866 } },
+            { name: "Bus Stop – Métare", position: { lat: 45.4393, lng: 4.3883 } }
+        ];
+
+        locations.forEach(loc => {
+            const icon = getIconForLocation(loc.name);
+            const marker = new google.maps.Marker({
+                position: loc.position,
+                map: map,
+                title: loc.name,
+                icon: {
+                    url: icon,
+                    scaledSize: new google.maps.Size(30, 30)
+                }
+            });
+
+            const info = new google.maps.InfoWindow({
+                content: `
+                    <div style="font-size: 14px; color: #333;">
+                        <strong>${loc.name}</strong><br>
+                        ${getDescriptionForLocation(loc.name)}
+                    </div>
+                `
+            });
+
+            marker.addListener("click", () => {
+                info.open(map, marker);
+            });
         });
 
-        marker.addListener("click", () => {
-            info.open(map, marker);
+        document.getElementById("reset-map").addEventListener("click", () => {
+            map.setCenter(iut);
+            map.setZoom(15);
         });
-    });
-}
-</script>
+    }
 
+    function getIconForLocation(name) {
+        if (name.includes("CROUS")) return "https://maps.google.com/mapfiles/kml/shapes/ranger_station.png";
+        if (name.includes("Parking")) return "https://maps.google.com/mapfiles/kml/shapes/parking_lot.png";
+        if (name.includes("Bus Stop")) return "https://maps.google.com/mapfiles/kml/shapes/bus.png";
+        return "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png";
+    }
+
+    function getDescriptionForLocation(name) {
+        const descriptions = {
+            "IUT Jean Monnet – Main Entrance": "Main entrance. Open 8 AM–8 PM.",
+            "CROUS Cafeteria": "Student cafeteria. Open 11:30 AM–2 PM.",
+            "Student Parking": "Free access with student card.",
+            "Bus Stop – Métare": "Bus stop for lines 1, 2, and 3."
+        };
+        return descriptions[name] || "";
+    }
+    </script>
 </body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForeIUT – Apartment</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #e6f7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 340px;
+    height: 90vh;
+    background: #f8ffff;
+    border-radius: 30px;
+    border: 3px solid #cfeaf5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+h1 {
+    color: #2ecc71;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.content {
+    font-size: 16px;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.nav {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-around;
+    border-top: 2px solid #cfeaf5;
+    padding-top: 10px;
+}
+
+.nav button {
+    background: green;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>🏠 Apartment</h1>
+    <div class="content">
+        <p>To rent an apartment in Saint-Étienne, you will need to prepare several documents and steps:</p>
+        <ul>
+            <li>Proof of income or a guarantor.</li>
+            <li>Liability insurance to cover potential damages.</li>
+            <li>Home insurance to cover damages within the residence.</li>
+            <li>A security deposit, usually equivalent to one month's rent.</li>
+        </ul>
+        <p>You can find apartments through student residences or rental platforms like SeLoger.</p>
+    </div>
+    <!-- NAVIGATION -->
+    <div class="nav">
+    <button onclick="history.back()">Return</button>
+	</div>
+</div>
+</body>
+</html>
