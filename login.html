@@ -85,15 +85,26 @@
 
 <script>
     function goChat() {
-        const name = document.getElementById("pseudoInput").value.trim();
+        const input = document.getElementById("pseudoInput");
+        const name = input.value.trim();
+
         if (name.length < 2) {
             alert("Enter a valid name.");
             return;
         }
+
+        // ✅ ON SAUVEGARDE LE TEXTE
         localStorage.setItem("chatName", name);
+
+        // (optionnel) initialiser les points
+        if (!localStorage.getItem("points")) {
+            localStorage.setItem("points", "0");
+        }
+
         window.location.href = "chat.html";
     }
 </script>
+
 
 </body>
 </html>

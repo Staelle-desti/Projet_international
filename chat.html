@@ -300,22 +300,24 @@
                 <h3>Join a Room</h3>
                 <div id="roomList"></div>
                 <button onclick="document.getElementById('roomsModal').style.display='none'">Close</button>
+				
             </div>
         </div>
         <div class="sideMenu" id="sideMenu">
             <h2>Menu</h2>
-            <div class="menuItem" onclick="openPage('chat')">💬 Chat</div>
-            <div class="menuItem" onclick="openPage('profile')">👤 Profile</div>
-            <div class="menuItem" onclick="openPage('notif')">🔔 Notifications</div>
-            <div class="menuItem" onclick="openPage('settings')">⚙ Settings</div>
+            <div class="menuItem" onclick="window.location.href='chat.html'">💬 Chat</div>
+            <div class="menuItem" onclick="window.location.href='profile.html'">👤 Profile</div>
+            <div class="menuItem" onclick="window.location.href='notifications.html'">🔔 Notifications</div>
+            <div class="menuItem" onclick="window.location.href='settings.html'">⚙ Settings</div>
 			<button class="menu-btn" onclick="location.href='accueil.html'">🏠Exit</button>
-            <!-- <div class="menuItem" style="background: #ff6b6b; color: white;" onclick="resetAllData()">🗑️ Reset All</div> -->
+            <!-- <div class="menuItem" style="background: #ff6b6b; color: white;" onclick="resetAllData()">🗑️ Reset All</div> --> -->
         </div>
     </div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
         import { getDatabase, ref, push, onChildAdded, update, onValue, set, remove } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+		import { runTransaction } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBGhwmJ3eSKbLp2k0qXzbOBgETzNdJlfl8",
@@ -398,17 +400,28 @@
                 showMessage(data.name, data.message, snap.key, data.likes || 0);
             });
         }
+		
+		
 
         function showMessage(sender, msg, msgId, likes) {
-            const div = document.createElement("div");
-            div.className = "bubble" + (sender === name ? " me" : "");
-            div.innerHTML = `
-                <b>${sender}</b><br>${msg}
-                <button class="likeBtn" onclick="likeMessage('${currentRoomId}', '${msgId}', '${sender}')">❤ ${likes}</button>
-            `;
-            messages.appendChild(div);
-            messages.scrollTop = messages.scrollHeight;
-        }
+    const div = document.createElement("div");
+    div.className = "bubble" + (sender === name ? " me" : "");
+
+    const likeBtn = document.createElement("button");
+    likeBtn.className = "likeBtn";
+    likeBtn.innerHTML = `❤️ <span>${likes}</span>`;
+
+    likeBtn.onclick = () => {
+        likeMessage(currentRoomId, msgId);
+    };
+
+    div.innerHTML = `<b>${sender}</b><br>${msg}`;
+    div.appendChild(likeBtn);
+
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+}
+
 
         window.sendMessage = function() {
             const input = document.getElementById("msgInput");
@@ -421,15 +434,15 @@
             input.value = "";
         };
 
-        window.likeMessage = function(roomId, msgId, sender) {
-            const likeRef = ref(db, `rooms/${roomId}/messages/${msgId}/likes`);
-            update(likeRef, (currentLikes) => (currentLikes || 0) + 1);
+        window.likeMessage = function(roomId, msgId) {
+    const likesRef = ref(db, `rooms/${roomId}/messages/${msgId}/likes`);
 
-            if (sender !== name) {
-                const senderPointsRef = ref(db, `users/${sender}/points`);
-                update(senderPointsRef, (currentPoints) => (currentPoints || 0) + 1);
-            }
-        };
+    runTransaction(likesRef, (currentLikes) => {
+        return (currentLikes || 0) + 1;
+    });
+};
+
+
 
         window.joinRoom = function(roomId, roomName) {
             currentRoomId = roomId;

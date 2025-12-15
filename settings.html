@@ -2,42 +2,65 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>ForeIUT – Settings</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings</title>
 
 <style>
 body {
-    font-family: Arial, sans-serif;
     background: #e6f7ff;
-    margin: 0;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
+
 .container {
     width: 340px;
+    height: 500px;
     background: #f8ffff;
     border-radius: 30px;
     border: 3px solid #cfeaf5;
     padding: 20px;
     text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
+
 h1 {
     color: #2ecc71;
+    margin-bottom: 25px;
 }
+
 .option {
-    background: #eaf7ff;
-    padding: 12px;
-    border-radius: 12px;
-    margin-top: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    border: 2px solid #6dc5ff;
+    cursor: pointer;
+    background: white;
 }
-button {
-    margin-top: 20px;
-    padding: 12px;
-    width: 200px;
-    border-radius: 40px;
+
+.option:hover {
+    background: #e3f7ff;
+}
+
+.logout {
+    background: #ff6b6b;
+    color: white;
     border: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.back {
+    margin-top: 20px;
     background: #2ecc71;
     color: white;
 }
@@ -48,15 +71,21 @@ button {
 <div class="container">
     <h1>Settings</h1>
 
-    <div class="option">🌐 Language (soon)</div>
-    <div class="option">🔔 Notifications (soon)</div>
-    <div class="option">🌙 Dark mode (soon)</div>
+    <!-- <div class="option"> Language (soon)</div> -->
+    <div class="option"> Notifications(soon)</div>
+    <div class="option"> Theme (soon)</div>
 
-    <button onclick="goBack()">⬅ Back</button>
+    <button class="logout" onclick="logout()">Logout</button>
+    <button class="back" onclick="goHome()"> Return</button>
 </div>
 
 <script>
-function goBack() {
+function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+function goHome() {
     window.location.href = "chat.html";
 }
 </script>
